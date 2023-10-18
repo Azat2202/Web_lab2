@@ -4,10 +4,13 @@ import java.io.Serializable;
 
 public class Point implements Serializable {
     private Integer x;
-    private Float y;
+    private Double y;
     private Integer r;
+    private Boolean status;
+    private String time;
+    private long scriptTime;
 
-    public Point(Integer x, Float y, Integer r) {
+    public Point(Integer x, Double y, Integer r) {
         this.x = x;
         this.y = y;
         this.r = r;
@@ -21,11 +24,11 @@ public class Point implements Serializable {
         this.x = x;
     }
 
-    public Float getY() {
+    public Double getY() {
         return y;
     }
 
-    public void setY(Float y) {
+    public void setY(Double y) {
         this.y = y;
     }
 
@@ -35,5 +38,29 @@ public class Point implements Serializable {
 
     public void setR(Integer r) {
         this.r = r;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public long getScriptTime() {
+        return scriptTime;
+    }
+
+    public void setScriptTime(long scriptTime) {
+        this.scriptTime = scriptTime;
     }
 }

@@ -12,16 +12,23 @@
     <meta name="author" content="Сиразетдинов Азат Ниязович">
     <meta name="description" content="Веб-программирование: Лабораторная работа №1.">
 
-    <!-- Компилляция less -->
+    <!-- Библиотека компиляции less -->
     <link rel="stylesheet/less" type="text/css" href="styles/styles.less" />
     <script src="https://cdn.jsdelivr.net/npm/less" ></script>
 
     <!-- Библиотека SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <!-- Библиотека jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script src="scripts/CanvasPrinter.js"></script>
     <script src="scripts/Validator.js"></script>
     <script src="scripts/onetime.js"></script>
+    <script src="scripts/updater.js"></script>
+
+    <jsp:useBean id="points"
+                 class="beans.PointsArray" scope="session"/>
 
     <link rel="icon" type="image/jpg" href="images/itmo_vt.jpg">
     <title>Лабораторная работа №2 | Веб-программирование</title>
@@ -32,7 +39,7 @@
 </header>
     <div id="main-container">
         <div id="form-container">
-            <form novalidate onsubmit="alert('sent')">
+            <form novalidate onsubmit="sendPoint()">
                 <div class="input-container" id="X-input-container">
                     <label for="X-input-container" class="form-label">Введите X:</label>
                     <input name="X-button-group" class="X-button" type="button" value="-5">
@@ -76,14 +83,14 @@
                     <th>Время работы программы (мкс)</th>
                     <th>Результат</th>
                 </tr>
-                <c:forEach items="${dots.collection}" var="col">
+                <c:forEach items="${points.points}" var="point">
                     <tr>
-                        <td>${col.x.toString().format("%.2f", col.x)}</td>
-                        <td>${col.y.toString().format("%.2f", col.y)}</td>
-                        <td>${col.r.toString().trim().format("%.2f", col.r)}</td>
-                        <td>${col.time.toString()}</td>
-                        <td>${col.scriptTime.toString()}</td>
-                        <td>${col.status.toString()}</td>
+                        <td>${point.x.toString()}</td>
+                        <td>${point.y.toString()}</td>
+                        <td>${point.r.toString()}</td>
+                        <td>${point.time.toString()}</td>
+                        <td>${point.scriptTime.toString()}</td>
+                        <td>${point.status.toString()}</td>
                     </tr>
                 </c:forEach>
             </table>

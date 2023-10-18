@@ -1,6 +1,10 @@
 class Validator{
     lastClickedX = null;
     lastClickedR = null;
+    validateAll(){
+        return this.validateX() && this.validateY() && this.validateR();
+    }
+
     validateX(){
         return this.lastClickedX != null;
     }

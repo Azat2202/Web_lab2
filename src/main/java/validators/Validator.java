@@ -1,13 +1,45 @@
 package validators;
 
+import beans.Point;
+import jakarta.servlet.http.HttpServletRequest;
+
 import java.util.Objects;
 
 public class Validator implements IValidator {
+    private HttpServletRequest req;
+    private Integer x;
+    private Double y;
+    private Integer r;
+    public Validator(HttpServletRequest req){
+        this.req = req;
+    }
+
+    public Point getPoint(){
+        if (x == null || y == null || r == null){
+            this.getStatus();
+        }
+        return new Point(x, y, r);
+    }
+
+    public boolean checkFormat(){
+        return !req.getParameter("X").isEmpty() && !req.getParameter("Y").isEmpty() && !req.getParameter("R").isEmpty();
+    }
+
+    public HitStatus getStatus(){
+        if(!validateX(req.getParameter("X")) || !validateY(req.getParameter("Y")) || !validateR(req.getParameter("Z"))){
+            return HitStatus.NOT_VALIDATED;
+        }
+        if(this.isHit()){
+            return HitStatus.HIT;
+        }
+        return HitStatus.MISS;
+    }
+
     @Override
     public boolean validateX(String xString) {
         if (Objects.isNull(xString) || xString.isEmpty()) return false;
         try {
-            int x = Integer.parseInt(xString);
+            this.x = Integer.parseInt(xString);
             return x >= -5 && x <= 3;
         } catch (NumberFormatException e) {
             return false;
@@ -18,8 +50,8 @@ public class Validator implements IValidator {
     public boolean validateY(String yString) {
         if (Objects.isNull(yString) || yString.isEmpty()) return false;
         try {
-            double x = Double.parseDouble(yString);
-            return x >= -3 && x <= 3;
+            this.y = Double.parseDouble(yString);
+            return y >= -3 && y <= 3;
         } catch (NumberFormatException e) {
             return false;
         }
@@ -29,22 +61,17 @@ public class Validator implements IValidator {
     public boolean validateR(String rString) {
         if (Objects.isNull(rString) || rString.isEmpty()) return false;
         try {
-            int x = Integer.parseInt(rString);
-            return x >= 1 && x <= 5;
+            this.r = Integer.parseInt(rString);
+            return r >= 1 && r <= 5;
         } catch (NumberFormatException e) {
             return false;
         }
     }
 
     @Override
-    public boolean isHit(String xString, String yString, String rString) {
-        int x = Integer.parseInt(xString);
-        double y = Double.parseDouble(yString);
-        int r = Integer.parseInt(rString);
-
+    public boolean isHit() {
         if(x >= 0 && y >= 0 && x <= r / 2 && y <= (double) r / 2) return true;
         if(x >= 0 && y <= 0 && x*x + y*y <= r*r) return true;
-        if(x <= 0 && y <= 0 && x < r/2 && y > -r) return true;
-        return false;
+        return x <= 0 && y <= 0 && x < r / 2 && y > -r;
     }
 }

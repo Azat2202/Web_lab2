@@ -1,9 +1,9 @@
-var ACCENT_BACKGROUND = "#00ADB5"
-var MAIN_BACKGROUND = "#EEEEEE"
+const ACCENT_BACKGROUND = "#00ADB5";
+const MAIN_BACKGROUND = "#EEEEEE";
 
+const validator = new Validator();
 window.onload = function () {
-    let validator = new Validator();
-    let canvasPrinter = new CanvasPrinter();
+    const canvasPrinter = new CanvasPrinter();
     canvasPrinter.drawStartImage()
     document.querySelectorAll('input[class="X-button"]').forEach(button => {
         button.addEventListener('click', () => {
@@ -25,6 +25,21 @@ window.onload = function () {
         validator.lastClickedR = radio;
     })
 
-
+    $.ajax({
+        type: "POST",
+        url: "controller-servlet",
+        dataType: "json",
+        async: false,
+        data: {
+            "X": 1,
+            "Y": 1,
+            "R": 1,
+            "timezone": new Date().getTimezoneOffset()
+        },
+        success: function (serverAnswer) {
+            const jsonObject = JSON.parse(JSON.stringify(serverAnswer));
+            document.getElementById("result-container").innerHTML = jsonObject.html;
+        }
+    });
 
 }

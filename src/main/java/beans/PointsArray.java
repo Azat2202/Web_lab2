@@ -17,4 +17,8 @@ public class PointsArray implements Serializable {
     public void setPoints(LinkedList<Point> points) {
         this.points = points;
     }
+
+    public void addPoint(Point point){
+        this.points.add(point);
+    }
 }
