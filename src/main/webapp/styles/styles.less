@@ -1,164 +1,127 @@
-@url('https://fonts.cdnfonts.com/css/soyuz-grotesk');
-font-face {
-  font-family: 'Rostov', serif;
-  src: url('fonts/Rostov.eot');
-  src: local('Rostov'),
-  url('fonts/Rostov.eot?#iefix') format('embedded-opentype'),
-  url('fonts/Rostov.woff') format('woff'),
-  url('fonts/Rostov.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
+@path-fonts:    'fonts';
+.font-names
+{
+    @font-face {
+        font-family: 'Rostov';
+        src: url('@{path-fonts}/Rostov.eot') format('enbedded-opentype'),
+        url('@{path-fonts}/Rostov.ttf') format('truetype'),
+        url('@{path-fonts}/Rostov.woff') format('woff');
+    }
+}
+*{
+    font-family: 'Rostov', serif;
+    font-size: 1.05em;
 }
 
-@COLOR_BACKGROUND: #E8EDE7;
-@COLOR_ELEMENT: #036280;
-@COLOR_TEXT: #012E4A;
-@COLOR_ACCENT: #81BECE;
+
+@main-background: #EEEEEE;
+@element-background: #00ADB5;
+@element-background-accent: #00ADB5;
+@text-color: #222831;
+@text-color-accent: #222831;
+@contrast-color: #00ADB5;
+
+//Some mixins
+.shadowing{
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.bordering{
+    background-color: @main-background;
+    border-radius: 7px;
+}
+
+//----
 
 body {
-  width: 100%;
-  margin: 0 auto;
-  background-color: @COLOR_BACKGROUND;
-  padding: 0 20px 20px 20px;
-  color: @COLOR_ELEMENT;
+    background-color: @main-background;
+    padding: 0 20px 20px 20px;
+    color: @text-color;
 }
+
 header{
-  color: @COLOR_ELEMENT;
-  font-size: 2.5em;
-  text-align: center;
+    font-size: 2.5em;
+    font-family: 'Rostov', Serif, serif, bold;
+    text-align: center;
 }
 
-table{
-  border-spacing: 10px;
-  border-collapse: separate;
+label {
+    &.form-label {
+        margin: 4% 10% 4% 2%;
+    }
+    &.Y-radio-labels{
+        margin-right: 5%;
+    }
 }
 
-label.request-label{
-  color: @COLOR_ELEMENT;
+.swal-popup {
+    font-size: 5em !important;
 }
 
-button {
-  background-color: @COLOR_ELEMENT;
-  border: none;
-  text-align: center;
-  width: auto;
-  padding: 0.2em;
-  height: auto;
-  border-radius: 15px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+input {
+    .shadowing();
+    &.main-button{
+        .shadowing();
+        .bordering();
+        margin: 0 4% 4% 2%;
+        &:hover{
+            background-color: @element-background-accent;
+        }
+    }
+    &[type=text]{
+        background-color: @main-background;
+        .bordering();
+        padding: 1px 1px 1px 5px;
+    }
+    &[type=button]{
+        &.X-button{
+            .bordering();
+            width: 1.7em;
+            height: 1.7em;
+        }
+        margin-right: 1%;
+    }
+    &[type=radio]{
+        appearance: none;
+        -webkit-appearance: none;
+        margin-right: 1%;
+        border: 2px solid @text-color;
+        border-radius: 50%;
+        padding: 11px;
+        accent-color: @text-color-accent;
+        &:checked{
+            background-color: @element-background-accent;
+        }
+    }
 }
 
-tr button{
-  line-height: 2.5em;
+div {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: space-around;
+
+    #Y-input-container {
+        @media only screen and (max-width: 576px) {
+            min-width: 0;
+        }
+
+        @media only screen and (min-width: 576px) {
+            min-width: 590px;
+        }
+    }
+    #buttons-container{
+        justify-content: flex-end;
+    }
+    &.input-container {
+        justify-content: flex-start;
+    }
 }
 
-button:hover{
-  background-color: @COLOR_ACCENT;
-}
 
-/* Селектор дочерних элементов */
-button > label{
-  color: @COLOR_ELEMENT;
-}
 
-#X-input{
-  width: 90%;
-  height: 90%;
-  margin: 5% 5% 5% 5%;
-}
 
-table#X-input{
-  line-height: 200%;
-}
 
-option, select{
-  color:@COLOR_ACCENT;
-  height: 2em;
-  width: 70px;
-  text-align: center;
-}
 
-option:checked{
-  color: @COLOR_ACCENT;
-}
 
-input{
-  border: none;
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-}
 
-input[type="checkbox"] {
-  transform: scale(2);
-  margin-right: 10%;
-  text-align: center;
-}
-
-input[type="text"] {
-  height: 1.5em;
-  /*margin-right: 10%;*/
-}
-
-.success{
-  color: #87C67A;
-}
-
-.fail{
-  color: #D18189;
-}
-
-#outputTable{
-  border-collapse: collapse;
-  margin: 25px 0;
-  font-size: 0.9em;
-  font-family: sans-serif;
-  min-width: 400px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-  text-align: center;
-}
-
-#outputTable tr th {
-  background-color: @COLOR_ELEMENT;
-  color: @COLOR_BACKGROUND;
-  text-align: left;
-}
-
-#outputTable th,
-#outputTable td {
-  padding: 12px 15px;
-}
-/*
-Селектор псевдокласса
-Отступ элемента ввода в процентах
- */
-td:has(.request-label){
-  text-align: right;
-  padding-right: 2%;
-  color: #012E4A;
-}
-
-td:has(#R-input), td:has(#Y-input){
-  text-align: left;
-}
-
-td:has(button){
-  text-align: right;
-}
-
-svg{
-  scale: 140%;
-}
-
-svg rect, svg polygon, svg path{
-  fill: @COLOR_ELEMENT;
-  stroke: @COLOR_ACCENT;
-
-}
-
-svg line{
-  fill: @COLOR_TEXT;
-}
-
-svg text{
-  fill: @COLOR_TEXT;
-}
