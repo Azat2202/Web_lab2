@@ -63,4 +63,9 @@ public class Point implements Serializable {
     public void setScriptTime(long scriptTime) {
         this.scriptTime = scriptTime;
     }
+
+    @Override
+    public String toString() {
+        return "{ " + this.x + ", " + this.y + ", " + this.r + " }";
+    }
 }

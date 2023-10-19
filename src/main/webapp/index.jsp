@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <meta name="author" content="Сиразетдинов Азат Ниязович">
-    <meta name="description" content="Веб-программирование: Лабораторная работа №1.">
+    <meta name="description" content="Веб-программирование: Лабораторная работа №2">
 
     <!-- Библиотека компиляции less -->
     <link rel="stylesheet/less" type="text/css" href="styles/styles.less" />
@@ -27,10 +27,14 @@
     <script src="scripts/onetime.js"></script>
     <script src="scripts/updater.js"></script>
 
-    <jsp:useBean id="points"
-                 class="beans.PointsArray" scope="session"/>
-
     <link rel="icon" type="image/jpg" href="images/itmo_vt.jpg">
+
+    <%
+        PointsArray pointsArray;
+        pointsArray = (session.getAttribute("bean") == null)
+                ? new PointsArray()
+                : (PointsArray) session.getAttribute("bean");
+    %>
     <title>Лабораторная работа №2 | Веб-программирование</title>
 </head>
 <body>
@@ -41,7 +45,7 @@
         <div id="form-container">
             <form novalidate onsubmit="sendPoint()">
                 <div class="input-container" id="X-input-container">
-                    <label for="X-input-container" class="form-label">Введите X:</label>
+                    <label class="form-label">Введите X:</label>
                     <input name="X-button-group" class="X-button" type="button" value="-5">
                     <input name="X-button-group" class="X-button" type="button" value="-4">
                     <input name="X-button-group" class="X-button" type="button" value="-3">
@@ -73,7 +77,7 @@
             <div id="graph-container">
                 <canvas id="graph" width="300" height="300"></canvas>
             </div>
-        <div id="result-container">
+        <div>
             <table id="results">
                 <tr>
                     <th>X</th>
@@ -83,16 +87,24 @@
                     <th>Время работы программы (мкс)</th>
                     <th>Результат</th>
                 </tr>
-                <c:forEach items="${points.points}" var="point">
+<%--                <tr>--%>
+<%--                    <td>1</td>--%>
+<%--                    <td>1</td>--%>
+<%--                    <td>1</td>--%>
+<%--                    <td>19/10/2023 15:27:31	</td>--%>
+<%--                    <td>1059</td>--%>
+<%--                    <td>false</td>--%>
+<%--                </tr>--%>
+                <% for(Point point: pointsArray.getPoints()){ %>
                     <tr>
-                        <td>${point.x.toString()}</td>
-                        <td>${point.y.toString()}</td>
-                        <td>${point.r.toString()}</td>
-                        <td>${point.time.toString()}</td>
-                        <td>${point.scriptTime.toString()}</td>
-                        <td>${point.status.toString()}</td>
+                        <td><%=point.getX() %></td>
+                        <td><%=point.getY() %></td>
+                        <td><%=point.getR() %></td>
+                        <td><%=point.getTime() %></td>
+                        <td><%=point.getStatus() %></td>
+                        <td><%=point.getScriptTime() %></td>
                     </tr>
-                </c:forEach>
+                <%}%>
             </table>
         </div>
     </div>

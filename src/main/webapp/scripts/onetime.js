@@ -11,7 +11,7 @@ window.onload = function () {
                 button.style.backgroundColor = MAIN_BACKGROUND
             })
             button.style.backgroundColor = ACCENT_BACKGROUND
-            validator.lastClickedX = button;
+            validator.lastClickedX = button.value;
         })
     })
 
@@ -21,25 +21,7 @@ window.onload = function () {
     document.querySelectorAll('input[name="R-radio-group"]').forEach(radio => {
         radio.addEventListener('click', () => {
             canvasPrinter.redrawAll(radio.value)
+            validator.lastClickedR = radio.value;
         })
-        validator.lastClickedR = radio;
     })
-
-    $.ajax({
-        type: "POST",
-        url: "controller-servlet",
-        dataType: "json",
-        async: false,
-        data: {
-            "X": 1,
-            "Y": 1,
-            "R": 1,
-            "timezone": new Date().getTimezoneOffset()
-        },
-        success: function (serverAnswer) {
-            const jsonObject = JSON.parse(JSON.stringify(serverAnswer));
-            document.getElementById("result-container").innerHTML = jsonObject.html;
-        }
-    });
-
 }

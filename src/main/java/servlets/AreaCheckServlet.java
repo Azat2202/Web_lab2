@@ -46,6 +46,7 @@ public class AreaCheckServlet extends HttpServlet {
             point.setStatus(hitStatus == HitStatus.HIT);
             point.setScriptTime(scriptTime);
             bean.addPoint(point);
+            req.getSession().setAttribute("bean", bean);
 
             Gson gson = new Gson();
             Map<String, Object> json = new HashMap<>();
@@ -57,7 +58,9 @@ public class AreaCheckServlet extends HttpServlet {
             json.put("scriptTime", point.getScriptTime());
             String msg = gson.toJson(json);
             resp.getWriter().write(msg);
+            resp.getWriter().flush();
         } catch (Exception exception){
+            exception.printStackTrace();
             ControllerServlet.sendError(resp, "Data is incorrect");
         }
     }

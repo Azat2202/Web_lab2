@@ -26,7 +26,7 @@ public class Validator implements IValidator {
     }
 
     public HitStatus getStatus(){
-        if(!validateX(req.getParameter("X")) || !validateY(req.getParameter("Y")) || !validateR(req.getParameter("Z"))){
+        if(!validateX(req.getParameter("X")) || !validateY(req.getParameter("Y")) || !validateR(req.getParameter("R"))){
             return HitStatus.NOT_VALIDATED;
         }
         if(this.isHit()){

@@ -10,10 +10,6 @@ function sendPoint(){
             "Y": document.getElementById("Y-input").value,
             "R": validator.lastClickedR,
             "timezone": new Date().getTimezoneOffset()
-        },
-        success: function (serverAnswer) {
-            const jsonObject = JSON.parse(JSON.stringify(serverAnswer));
-            document.getElementById("result-container").innerHTML = jsonObject.html;
         }
     });
 }
