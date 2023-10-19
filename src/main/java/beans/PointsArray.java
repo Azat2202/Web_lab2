@@ -19,9 +19,6 @@ public class PointsArray implements Serializable {
     }
 
     public void addPoint(Point point){
-        System.out.println("added "+ point);
-        this.points.add(point);
-        System.out.println("Points: ");
-        points.forEach(System.out::println);
+        this.points.addFirst(point);
     }
 }

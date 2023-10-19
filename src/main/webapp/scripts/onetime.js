@@ -3,6 +3,7 @@ const MAIN_BACKGROUND = "#EEEEEE";
 
 const validator = new Validator();
 window.onload = function () {
+    console.log(new Date().getTimezoneOffset())
     const canvasPrinter = new CanvasPrinter();
     canvasPrinter.drawStartImage()
     document.querySelectorAll('input[class="X-button"]').forEach(button => {
@@ -24,4 +25,8 @@ window.onload = function () {
             validator.lastClickedR = radio.value;
         })
     })
+
+    canvasPrinter.canvas.addEventListener('click', function(event) {
+        canvasPrinter.parseClick(event)
+    });
 }

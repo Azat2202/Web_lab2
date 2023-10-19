@@ -16,10 +16,10 @@
 
 @main-background: #EEEEEE;
 @element-background: #00ADB5;
-@element-background-accent: #00ADB5;
 @text-color: #222831;
-@text-color-accent: #222831;
-@contrast-color: #00ADB5;
+@green-status: #00b509;
+@red-status: #b50300;
+
 
 //Some mixins
 .shadowing{
@@ -29,6 +29,7 @@
 .bordering{
     background-color: @main-background;
     border-radius: 7px;
+    border: 2px solid @text-color;
 }
 
 //----
@@ -45,6 +46,10 @@ header{
     text-align: center;
 }
 
+.swal-popup {
+    font-size: 5em !important;
+}
+
 label {
     &.form-label {
         margin: 4% 10% 4% 2%;
@@ -54,9 +59,6 @@ label {
     }
 }
 
-.swal-popup {
-    font-size: 5em !important;
-}
 
 input {
     .shadowing();
@@ -65,7 +67,8 @@ input {
         .bordering();
         margin: 0 4% 4% 2%;
         &:hover{
-            background-color: @element-background-accent;
+            background-color: @element-background;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
         }
     }
     &[type=text]{
@@ -82,15 +85,14 @@ input {
         margin-right: 1%;
     }
     &[type=radio]{
+        .bordering();
         appearance: none;
         -webkit-appearance: none;
         margin-right: 1%;
-        border: 2px solid @text-color;
-        border-radius: 50%;
         padding: 11px;
-        accent-color: @text-color-accent;
+        accent-color: @text-color;
         &:checked{
-            background-color: @element-background-accent;
+            background-color: @element-background;
         }
     }
 }
@@ -118,10 +120,36 @@ div {
     }
 }
 
+table {
+    &#results {
+        border-collapse: collapse;
+        margin: 20px;
+        width: 100%;
+        text-align: center;
+        th{
+            background: color-mix(in srgb, @element-background 50%, @main-background);
+            color: @text-color;
+            padding: 15px;
+        }
+        tr{
+            &:nth-of-type(odd){
+                background-color: darken(@main-background, 10%);
+            }
+        }
+        td{
+            &.green-status{
+                color: @green-status;
+            }
+            &.red-status{
+                color: @red-status;
+            }
+        }
+    }
+}
 
-
-
-
-
-
-
+// Скрыть последние два столбца на узких экранах
+@media (max-width: 600px) {
+    .hide-me{
+        display: none;
+    }
+}

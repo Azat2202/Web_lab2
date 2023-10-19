@@ -13,12 +13,20 @@ import validators.Validator;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
 import static java.time.temporal.ChronoUnit.MINUTES;
+
+/*TODO:
+    Исправить проверку попадания
+    Добавить отображение точек
+    Задеплоить на гелиос
+ */
 
 @WebServlet("/area-check-servlet")
 public class AreaCheckServlet extends HttpServlet {
@@ -33,7 +41,7 @@ public class AreaCheckServlet extends HttpServlet {
 
             int timezone = Integer.parseInt(req.getParameter("timezone"));
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-            String currentTime = formatter.format(LocalDateTime.now().plusMinutes(timezone));
+            String currentTime = formatter.format(LocalDateTime.now(ZoneOffset.UTC).plusMinutes(timezone));
             long scriptTime = (long) ((System.nanoTime() - timer) * 0.001);
 
             var bean = (PointsArray) req.getSession().getAttribute("bean");

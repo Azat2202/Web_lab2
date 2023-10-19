@@ -44,6 +44,18 @@ public class Point implements Serializable {
         return status;
     }
 
+    public String getStringStatus(){
+        return (status)
+                ? "Попадание"
+                : "Промах";
+    }
+
+    public String getHTMLClass(){
+        return (status)
+                ? "green-status"
+                : "red-status";
+    }
+
     public void setStatus(Boolean status) {
         this.status = status;
     }

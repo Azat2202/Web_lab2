@@ -102,6 +102,35 @@ class CanvasPrinter{
         this.ctx.stroke();
     }
 
+    parseClick(event){
+        const xPixels = event.clientX - this.canvas.offsetLeft;
+        const yPixels = event.clientY - this.canvas.offsetTop;
+        const totalPoints = 12;
+        const pointInPixels = this.SIZE / totalPoints;
+        const x = - (this.SIZE / 2 - xPixels) / pointInPixels
+        const y = - yPixels / pointInPixels + totalPoints / 2                // LOL magic formula))
+
+        if(x > 5 || x < -5 || y > 3 || y < -3) {
+            Swal.fire({
+                title: 'Клик вне зоны графика',
+                text: 'X принимает значения от -5 до 5\n Y от -3 до 3',
+                icon: 'warning'
+            });
+            return
+        }
+
+        if(!validator.lastClickedR) {
+            Swal.fire({
+                title: 'Невозможно определить радиус',
+                text: 'Выберите радиус',
+                icon: 'warning'
+            });
+            return
+        }
+        sendPoint(x, y.toFixed(16), validator.lastClickedR)
+        location.reload()
+    }
+
     drawPoint(x, y, success = true) {
         this.ctx.fillStyle = success
             ? this.COLOR_GREEN

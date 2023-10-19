@@ -43,7 +43,7 @@
 </header>
     <div id="main-container">
         <div id="form-container">
-            <form novalidate onsubmit="sendPoint()">
+            <form novalidate onsubmit="parseForm()">
                 <div class="input-container" id="X-input-container">
                     <label class="form-label">Введите X:</label>
                     <input name="X-button-group" class="X-button" type="button" value="-5">
@@ -83,25 +83,17 @@
                     <th>X</th>
                     <th>Y</th>
                     <th>R</th>
-                    <th>Текущее время</th>
-                    <th>Время работы программы (мкс)</th>
                     <th>Результат</th>
+                    <th class="hide-me">Текущее время</th>
+                    <th class="hide-me">Время работы программы (мкс)</th>
                 </tr>
-<%--                <tr>--%>
-<%--                    <td>1</td>--%>
-<%--                    <td>1</td>--%>
-<%--                    <td>1</td>--%>
-<%--                    <td>19/10/2023 15:27:31	</td>--%>
-<%--                    <td>1059</td>--%>
-<%--                    <td>false</td>--%>
-<%--                </tr>--%>
                 <% for(Point point: pointsArray.getPoints()){ %>
                     <tr>
                         <td><%=point.getX() %></td>
                         <td><%=point.getY() %></td>
                         <td><%=point.getR() %></td>
-                        <td><%=point.getTime() %></td>
-                        <td><%=point.getStatus() %></td>
+                        <td class="<%= point.getHTMLClass() %>"><%=point.getStringStatus() %></td>
+                        <td><%=point.getTime()%></td>
                         <td><%=point.getScriptTime() %></td>
                     </tr>
                 <%}%>
