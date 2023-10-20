@@ -3,24 +3,24 @@ package beans;
 import java.io.Serializable;
 
 public class Point implements Serializable {
-    private Integer x;
+    private Double x;
     private Double y;
     private Integer r;
     private Boolean status;
     private String time;
     private long scriptTime;
 
-    public Point(Integer x, Double y, Integer r) {
+    public Point(Double x, Double y, Integer r) {
         this.x = x;
         this.y = y;
         this.r = r;
     }
 
-    public Integer getX() {
+    public Double getX() {
         return x;
     }
 
-    public void setX(Integer x) {
+    public void setX(Double x) {
         this.x = x;
     }
 

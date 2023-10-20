@@ -58,7 +58,7 @@
                 </div>
                 <div class="input-container" id="Y-input-container">
                     <label for="Y-input" class="form-label">Введите Y:</label>
-                    <input id="Y-input" name="Y-input" type="text" value="0" maxlength="16">
+                    <input id="Y-input" name="Y-input" type="text" value="0" maxlength="5">
                 </div>
                 <div class="input-container" id="R-input-container">
                     <label for="R-input-container" class="form-label" id="R-input-label">Введите R:</label>

@@ -113,10 +113,10 @@ class CanvasPrinter{
         const x = - (this.SIZE / 2 - xPixels) / pointInPixels
         const y = (this.SIZE / 2 - yPixels) / pointInPixels
 
-        if(x > 3 || x < -5 || y > 3 || y < -3) {
+        if(x > 5 || x < -5 || y > 5 || y < -5) {
             Swal.fire({
                 title: 'Клик вне зоны графика',
-                text: 'X принимает значения от -5 до 3\n Y от -3 до 3',
+                text: 'X принимает значения от -5 до 5\n Y от -5 до 5',
                 icon: 'warning'
             });
             return
@@ -130,7 +130,7 @@ class CanvasPrinter{
             });
             return
         }
-        sendPoint(x, y.toFixed(16), validator.lastClickedR)
+        sendPoint(x.toFixed(3), y.toFixed(3), validator.lastClickedR)
         location.reload()
     }
 
@@ -139,7 +139,7 @@ class CanvasPrinter{
         $("#results tr").each(function(){
             let currentRow=$(this);
             arrData.push({
-                "x": parseInt(currentRow.find("td:eq(0)").text()),
+                "x": parseFloat(currentRow.find("td:eq(0)").text()),
                 "y": parseFloat(currentRow.find("td:eq(1)").text()),
                 "r": parseInt(currentRow.find("td:eq(2)").text()),
                 "status": currentRow.find("td:eq(3)").text() === "Попадание",

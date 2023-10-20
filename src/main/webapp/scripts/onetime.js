@@ -28,4 +28,8 @@ window.onload = function () {
     canvasPrinter.canvas.addEventListener('click', function(event) {
         canvasPrinter.parseClick(event)
     });
+    // Not auto update page after form submit
+    $('form').submit(function(e) {
+        e.preventDefault();
+    })
 }

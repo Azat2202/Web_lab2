@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public class Validator implements IValidator {
     private HttpServletRequest req;
-    private Integer x;
+    private Double x;
     private Double y;
     private Integer r;
     public Validator(HttpServletRequest req){
@@ -39,7 +39,7 @@ public class Validator implements IValidator {
     public boolean validateX(String xString) {
         if (Objects.isNull(xString) || xString.isEmpty()) return false;
         try {
-            this.x = Integer.parseInt(xString);
+            this.x = Double.parseDouble(xString);
             return x >= -5 && x <= 3;
         } catch (NumberFormatException e) {
             return false;
@@ -72,6 +72,6 @@ public class Validator implements IValidator {
     public boolean isHit() {
         if(x >= 0 && y >= 0 && y <= (double) r / 2 - x) return true;
         if(x >= 0 && y <= 0 && x*x + y*y <= r*r) return true;
-        return x <= 0 && y <= 0 && x >= - r / 2 && y >= - r;
+        return x <= 0 && y <= 0 && x >= (double) -r / 2 && y >= - r;
     }
 }
