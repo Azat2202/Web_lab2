@@ -30,7 +30,7 @@ public class ControllerServlet extends HttpServlet {
     }
 
     public static void sendError(HttpServletResponse resp, String message) throws IOException {
-        var json = new Gson();
+        Gson json = new Gson();
         Map<String, Object> jsonResponse = new HashMap<>() {{
             put("error", "Data is incorrect");
             put("status", "UNPROCESSABLE_ENTITY");

@@ -113,10 +113,10 @@ class CanvasPrinter{
         const x = - (this.SIZE / 2 - xPixels) / pointInPixels
         const y = (this.SIZE / 2 - yPixels) / pointInPixels
 
-        if(x > 5 || x < -5 || y > 5 || y < -5) {
+        if(x > 3 || x < -5 || y > 3 || y < -3) {
             Swal.fire({
                 title: 'Клик вне зоны графика',
-                text: 'X принимает значения от -5 до 5\n Y от -5 до 5',
+                text: 'X принимает значения от -5 до 3\n Y от -3 до 3',
                 icon: 'warning'
             });
             return

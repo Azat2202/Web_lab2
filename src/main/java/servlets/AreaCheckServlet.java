@@ -37,12 +37,14 @@ public class AreaCheckServlet extends HttpServlet {
             HitStatus hitStatus = validator.getStatus();
             Point point = validator.getPoint();
 
+            if(hitStatus.equals(HitStatus.NOT_VALIDATED)) return;
+
             int timezone = Integer.parseInt(req.getParameter("timezone"));
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
             String currentTime = formatter.format(LocalDateTime.now(ZoneOffset.UTC).plusMinutes(timezone));
             long scriptTime = (long) ((System.nanoTime() - timer) * 0.001);
 
-            var bean = (PointsArray) req.getSession().getAttribute("bean");
+            PointsArray bean = (PointsArray) req.getSession().getAttribute("bean");
             if (bean == null) {
                 bean = new PointsArray();
                 req.getSession().setAttribute("bean", bean);
