@@ -23,8 +23,6 @@ import java.util.Map;
 import static java.time.temporal.ChronoUnit.MINUTES;
 
 /*TODO:
-    Исправить проверку попадания
-    Добавить отображение точек
     Задеплоить на гелиос
  */
 

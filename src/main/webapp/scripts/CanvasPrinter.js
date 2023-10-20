@@ -4,8 +4,8 @@ class CanvasPrinter{
     TEXT_SIZE = 20;
     TEXT_MARGIN = 15;
     TEXT_LINE_HEIGHT = 3;
-    COLOR_RED = "#D18189"
-    COLOR_GREEN = "#87C67A"
+    COLOR_RED = "#b50300"
+    COLOR_GREEN = "#00b509"
     COLOR_MAIN = "#00ADB5"
     constructor() {
         this.canvas = document.getElementById("graph");
@@ -18,6 +18,8 @@ class CanvasPrinter{
         this.drawAxes();
         this.setPointerAtDot(5);
         this.setPointerAtDot(1);
+        this.drawPoints();
+
     }
 
     redrawAll(r){
@@ -26,6 +28,7 @@ class CanvasPrinter{
         this.drawAxes();
         this.setPointerAtDot(5);
         this.setPointerAtDot(1);
+        this.drawPoints();
     }
 
     drawAxes() {
@@ -103,17 +106,17 @@ class CanvasPrinter{
     }
 
     parseClick(event){
-        const xPixels = event.clientX - this.canvas.offsetLeft;
-        const yPixels = event.clientY - this.canvas.offsetTop;
+        const xPixels = event.clientX - this.canvas.getBoundingClientRect().left;
+        const yPixels = event.clientY - this.canvas.getBoundingClientRect().top;
         const totalPoints = 12;
         const pointInPixels = this.SIZE / totalPoints;
         const x = - (this.SIZE / 2 - xPixels) / pointInPixels
-        const y = - yPixels / pointInPixels + totalPoints / 2                // LOL magic formula))
+        const y = (this.SIZE / 2 - yPixels) / pointInPixels
 
-        if(x > 5 || x < -5 || y > 3 || y < -3) {
+        if(x > 3 || x < -5 || y > 3 || y < -3) {
             Swal.fire({
                 title: 'Клик вне зоны графика',
-                text: 'X принимает значения от -5 до 5\n Y от -3 до 3',
+                text: 'X принимает значения от -5 до 3\n Y от -3 до 3',
                 icon: 'warning'
             });
             return
@@ -129,6 +132,25 @@ class CanvasPrinter{
         }
         sendPoint(x, y.toFixed(16), validator.lastClickedR)
         location.reload()
+    }
+
+    drawPoints(){
+        var arrData=[];
+        $("#results tr").each(function(){
+            let currentRow=$(this);
+            arrData.push({
+                "x": parseInt(currentRow.find("td:eq(0)").text()),
+                "y": parseFloat(currentRow.find("td:eq(1)").text()),
+                "r": parseInt(currentRow.find("td:eq(2)").text()),
+                "status": currentRow.find("td:eq(3)").text() === "Попадание",
+                "time": currentRow.find("td:eq(4)").text(),
+                "scriptTime": currentRow.find("td:eq(5)").text()
+            })
+        });
+        arrData.shift() // Delete headers
+        arrData.forEach(dot =>{
+            this.drawPoint(dot.x, dot.y, dot.status)
+        })
     }
 
     drawPoint(x, y, success = true) {

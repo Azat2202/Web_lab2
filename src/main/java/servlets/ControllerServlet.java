@@ -17,7 +17,7 @@ import java.util.Map;
 public class ControllerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        req.getRequestDispatcher("index.jsp").forward(req, resp);
+        req.getRequestDispatcher("./area-reply-servlet").forward(req, resp);
     }
 
     @Override

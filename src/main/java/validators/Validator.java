@@ -70,8 +70,8 @@ public class Validator implements IValidator {
 
     @Override
     public boolean isHit() {
-        if(x >= 0 && y >= 0 && x <= r / 2 && y <= (double) r / 2) return true;
+        if(x >= 0 && y >= 0 && y <= (double) r / 2 - x) return true;
         if(x >= 0 && y <= 0 && x*x + y*y <= r*r) return true;
-        return x <= 0 && y <= 0 && x < r / 2 && y > -r;
+        return x <= 0 && y <= 0 && x >= - r / 2 && y >= - r;
     }
 }

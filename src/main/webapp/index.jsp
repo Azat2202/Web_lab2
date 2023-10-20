@@ -93,8 +93,8 @@
                         <td><%=point.getY() %></td>
                         <td><%=point.getR() %></td>
                         <td class="<%= point.getHTMLClass() %>"><%=point.getStringStatus() %></td>
-                        <td><%=point.getTime()%></td>
-                        <td><%=point.getScriptTime() %></td>
+                        <td class="hide-me"><%=point.getTime()%></td>
+                        <td class="hide-me"><%=point.getScriptTime() %></td>
                     </tr>
                 <%}%>
             </table>
