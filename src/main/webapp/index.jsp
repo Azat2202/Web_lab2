@@ -69,7 +69,7 @@
                     <input type="radio" name="R-radio-group" id="Y-input-5" value="5"><label class="Y-radio-labels" for="Y-input-5">5</label>
                 </div>
                 <div class="input-container" id="buttons-container">
-                    <input id="clear" class="form-label main-button" name="clear" type="button" value="Очистить">
+<%--                    <input id="clear" class="form-label main-button" name="clear" type="button" value="Очистить">--%>
                     <input id='check' class="main-button" name='check' type='submit' value='Проверить'>
                 </div>
             </form>

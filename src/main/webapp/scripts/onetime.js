@@ -20,8 +20,8 @@ window.onload = function () {
 
     document.querySelectorAll('input[name="R-radio-group"]').forEach(radio => {
         radio.addEventListener('click', () => {
-            canvasPrinter.redrawAll(radio.value)
             validator.lastClickedR = radio.value;
+            canvasPrinter.redrawAll(radio.value)
         })
     })
 

@@ -149,11 +149,17 @@ class CanvasPrinter{
         });
         arrData.shift() // Delete headers
         arrData.forEach(dot =>{
-            this.drawPoint(dot.x, dot.y, dot.status)
+            this.drawPoint(dot.x, dot.y, dot.r, dot.status)
         })
     }
 
-    drawPoint(x, y, success = true) {
+    drawPoint(x, y, r, success = true) {
+        let r_now = validator.lastClickedR
+        if(r_now != null) {
+            x *= r_now / r
+            y *= r_now / r
+        }
+
         this.ctx.fillStyle = success
             ? this.COLOR_GREEN
             : this.COLOR_RED;
